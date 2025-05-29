@@ -1,51 +1,55 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
+    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.title }}</title>
 
-    {% include meta.html %}
-
-    <!--[if lt IE 9]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
-
-    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+    {% include head.html %}
   </head>
 
   <body>
-    <div class="wrapper-masthead">
-      <div class="container">
-        <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
+    <script>
+      (function() {
+        const htmlElement = document.documentElement;
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          if (savedTheme === 'dark') {
+            htmlElement.classList.add('dark');
+          } else {
+            htmlElement.classList.remove('dark');
+          }
+        } else {
+          // Check system preference if no saved theme
+          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            htmlElement.classList.add('dark');
+          } else {
+            htmlElement.classList.remove('dark');
+          }
+        }
+      })();
+    </script>
 
-          <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-            <p class="site-description">{{ site.description }}</p>
-          </div>
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="{{ "/" | relative_url }}">{{ site.title }}</a>
+        <nav class="site-nav">
+          <ul>
+            <li><a href="{{ "/about/" | relative_url }}">About</a></li>
+            <li><a href="{{ site.github.repository_url }}" target="_blank">GitHub</a></li>
+          </ul>
+        </nav>
+        {% include dark_mode_toggle.html %} </div>
+    </header>
 
-          <nav>
-            <a href="{{ site.baseurl }}/">Blog</a>
-            <a href="{{ site.baseurl }}/about">About</a>
-          </nav>
-        </header>
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        {{ content }}
       </div>
-    </div>
+    </main>
 
-    <div id="main" role="main" class="container">
-      {{ content }}
-    </div>
-
-    <div class="wrapper-footer">
-      <div class="container">
-        <footer class="footer">
-          {% include svg-icons.html %}
-        </footer>
+    <footer class="site-footer">
+      <div class="wrapper">
+        &copy; {{ site.time | date: "%Y" }} {{ site.title }}. All rights reserved.
       </div>
-    </div>
-
-    {% include analytics.html %}
+    </footer>
   </body>
 </html>
