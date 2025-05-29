@@ -14,7 +14,11 @@ avatar: https://raw.githubusercontent.com/barryclark/jekyll-now/master/images/je
 #
 # Flags below are optional
 #
-
+# Hero Section Settings (Add these to your _config.yml)
+hero_title: "Your Awesome Jekyll Blog"
+hero_subtitle: "A modern, responsive blog built with Jekyll Now."
+hero_button_text: "Explore Posts"
+hero_button_link: "/#posts" # This links to the posts section on your homepage
 # Includes an icon in the footer for each username you enter
 footer-links:
   dribbble:
