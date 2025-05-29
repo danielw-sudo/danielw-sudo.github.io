@@ -1,27 +1,44 @@
+// Color Palette Variables for Light and Dark Modes
 
-//
-// VARIABLES
-//
+// --- Light Mode Colors ---
+// These colors are active when the 'dark' class is NOT present on the <html> tag.
+$lm-primary-color: #4361ee;       // Used for links, buttons, main accents (consistent across modes)
+$lm-secondary-color: #f4f7f6;     // Light background for header/footer or sections
+$lm-accent-color: #e74c3c;        // Highlight color (consistent across modes)
+$lm-text-color: #333333;          // Main text color for light backgrounds
+$lm-background-color: #ffffff;    // Overall page background in light mode
+$lm-card-background: #ffffff;     // Background for post cards in light mode
+$lm-border-color: #dddddd;        // Light borders
 
-// Colors
-$blue: #4183C4;
+// --- Dark Mode Colors ---
+// These colors are active when the 'dark' class IS present on the <html> tag.
+$dm-primary-color: #4361ee;       // Used for links, buttons, main accents (consistent across modes)
+$dm-secondary-color: #003049;     // Dark background for header/footer or sections
+$dm-accent-color: #e74c3c;        // Highlight color (consistent across modes)
+$dm-text-color: #caf0f8;          // Main text color for dark backgrounds
+$dm-background-color: #0d4660;    // Overall page background in dark mode (slightly lighter than secondary)
+$dm-card-background: #333333;     // Background for post cards in dark mode
+$dm-border-color: #555555;        // Dark borders
 
-// Grays
-$black: #000;
-$darkerGray: #222;
-$darkGray: #333;
-$gray: #666;
-$lightGray: #eee;
-$white: #fff;
+// Define CSS Variables that will be used in style.scss
+// These will be overridden for dark mode
+:root {
+  --primary-color: #{$lm-primary-color};
+  --secondary-color: #{$lm-secondary-color};
+  --accent-color: #{$lm-accent-color};
+  --text-color: #{$lm-text-color};
+  --background-color: #{$lm-background-color};
+  --card-background: #{$lm-card-background};
+  --border-color: #{$lm-border-color};
+}
 
-// Font stacks
-$helvetica: Helvetica, Arial, sans-serif;
-$helveticaNeue: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$georgia: Georgia, serif;
-
-// Mobile breakpoints
-@mixin mobile {
-  @media screen and (max-width: 640px) {
-    @content;
-  }
+// Override CSS Variables for Dark Mode
+html.dark {
+  --primary-color: #{$dm-primary-color};
+  --secondary-color: #{$dm-secondary-color};
+  --accent-color: #{$dm-accent-color};
+  --text-color: #{$dm-text-color};
+  --background-color: #{$dm-background-color};
+  --card-background: #{$dm-card-background};
+  --border-color: #{$dm-border-color};
 }
