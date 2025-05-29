@@ -9,7 +9,7 @@ name: DanielW
 description: Ici present.
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://raw.githubusercontent.com/barryclark/jekyll-now/master/images/jekyll-logo.png
+avatar: https://pub-464c102cb748463bba378594074948d9.r2.dev/tools4all-ai/production/images/favicon-23bc569b6e92b3d73446e309b7e411ba.png
 
 #
 # Flags below are optional
@@ -19,6 +19,7 @@ hero_title: "Your Awesome Jekyll Blog"
 hero_subtitle: "A modern, responsive blog built with Jekyll Now."
 hero_button_text: "Explore Posts"
 hero_button_link: "/#posts" # This links to the posts section on your homepage
+hero_image_url: "https://media.tools4all.ai/tools4all-ai/production/media/image-5b1c32e86fc6835a01289d1bc5140399.jpg"
 # Includes an icon in the footer for each username you enter
 footer-links:
   dribbble:
