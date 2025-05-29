@@ -1,42 +1,175 @@
 ---
 ---
 
-// Import variables from _sass/variables.scss
-@import "variables";
+// 
+// IMPORTS - Keep essential Jekyll Now imports
+// 
+@import "reset";
+@import "variables"; // Our custom variables for colors (light/dark mode)
+@import "highlights"; // For syntax highlighting in code blocks
+@import "svg-icons"; // For any SVG icons used by the theme
 
-// Base styles using CSS variables for theme switching
+
+/**************/
+/* BASE RULES */
+/**************/
+
+html {
+  font-size: 100%;
+}
+
 body {
-  font-family: 'Inter', sans-serif; // Make sure Inter font is loaded in default.html <head>
+  font-family: 'Inter', sans-serif; // Using Inter font
   line-height: 1.6;
   margin: 0;
   padding: 0;
   background-color: var(--background-color); // Uses dynamic background color
   color: var(--text-color); // Uses dynamic text color
   transition: background-color 0.3s ease, color 0.3s ease; // Smooth transition for theme change
+  -webkit-font-smoothing: antialiased; // For better font rendering on WebKit browsers
+  -moz-osx-font-smoothing: grayscale; // For better font rendering on Firefox
+}
+
+// Basic text styling
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-color); // Headings use dynamic text color
+  font-weight: bold;
+  line-height: 1.7;
+  margin: 1em 0 15px;
+  padding: 0;
+
+  @media (max-width: 768px) { // Corresponding to @include mobile
+    line-height: 1.4;
+  }
+}
+
+h1 {
+  font-size: 30px;
+  a {
+    color: inherit;
+  }
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+h4 {
+  font-size: 18px;
+  color: var(--text-color); // Or a slightly lighter shade if desired
+}
+
+p {
+  margin: 15px 0;
 }
 
 a {
   color: var(--primary-color); // Uses dynamic primary color for links
   text-decoration: none;
-  &:hover {
-    text-decoration: underline;
+  cursor: pointer;
+  &:hover, &:active {
+    text-decoration: underline; // Standard underline on hover
   }
 }
 
-// Header styles
+ul, ol {
+  margin: 15px 0;
+  padding-left: 30px;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+ol ul, ul ol, ul ul, ol ol {
+  margin: 0;
+}
+
+ul ul, ol ul {
+  list-style-type: circle;
+}
+
+em, i {
+  font-style: italic;
+}
+
+strong, b {
+  font-weight: bold;
+}
+
+img {
+  max-width: 100%;
+  height: auto; // Ensure image height scales proportionally
+  display: block; // Prevent extra space below images
+  margin: 0 auto; // Center images
+}
+
+// Fixes images in popup boxes from Google Translate
+.gmnoprint img {
+  max-width: none;
+}
+
+.date {
+  font-style: italic;
+  color: var(--text-color); // Date uses dynamic text color
+  opacity: 0.8;
+}
+
+// Specify the color of the selection
+::-moz-selection {
+  color: var(--background-color); // Inverted selection color
+  background: var(--primary-color);
+}
+::selection {
+  color: var(--background-color); // Inverted selection color
+  background: var(--primary-color);
+}
+
+// Nicolas Gallagher's micro clearfix hack
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+
+/*********************/
+/* LAYOUT / SECTIONS */
+/*********************/
+
+// Global wrapper for content centering
+.wrapper {
+  max-width: 1000px; // Slightly smaller max-width for content
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+// Header styles (Replaces .masthead, .site-avatar, .site-info, nav)
 .site-header {
   background-color: var(--secondary-color); // Uses dynamic secondary color
-  color: var(--text-color); // Uses dynamic text color
+  color: var(--text-color); // Uses dynamic text color for header text
   padding: 1.5rem 0;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--border-color); // Add a subtle border
+
   .wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
     flex-wrap: wrap; // Allow wrapping on smaller screens
   }
   .site-title {
@@ -46,6 +179,10 @@ a {
     text-decoration: none;
     margin-right: 20px;
     white-space: nowrap; // Prevent title from breaking
+    transition: color 0.3s ease;
+    &:hover {
+      color: var(--primary-color);
+    }
   }
   .site-nav {
     flex-grow: 1; // Allow nav to take available space
@@ -61,6 +198,7 @@ a {
         a {
           color: var(--text-color);
           font-weight: 600; // Semi-bold
+          transition: color 0.3s ease;
           &:hover {
             color: var(--primary-color);
           }
@@ -70,7 +208,8 @@ a {
   }
 }
 
-// Hero Section
+
+// Hero Section (New)
 .hero-section {
   background-color: var(--secondary-color); // Uses dynamic secondary color
   color: var(--text-color); // Uses dynamic text color
@@ -83,8 +222,23 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative; // For overlay
+
+  &::before { // Optional: Add a subtle overlay for text readability
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); // Semi-transparent black overlay
+    z-index: 1;
+  }
+
   .hero-content {
     max-width: 800px;
+    position: relative; // Bring content above overlay
+    z-index: 2;
   }
   .hero-title {
     font-size: 3.5rem;
@@ -119,13 +273,11 @@ a {
 .page-content {
   padding: 40px 0;
   .wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    // Uses the global .wrapper defined above
   }
 }
 
-// Post Grid and Cards
+// Post Grid and Cards (New)
 .posts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -153,6 +305,7 @@ a {
       a {
         color: var(--text-color); // Post title uses dynamic text color
         text-decoration: none;
+        transition: color 0.3s ease;
         &:hover {
           color: var(--primary-color);
           text-decoration: underline;
@@ -176,6 +329,7 @@ a {
       font-weight: 700;
       text-transform: uppercase;
       font-size: 0.9rem;
+      transition: color 0.3s ease;
       &:hover {
         text-decoration: underline;
       }
@@ -183,7 +337,28 @@ a {
   }
 }
 
-// Footer styles
+// Standard post page content (for individual posts)
+.post {
+  blockquote {
+    margin: 1.8em .8em;
+    border-left: 2px solid var(--border-color); // Border color
+    padding: 0.1em 1em;
+    color: var(--text-color);
+    opacity: 0.8;
+    font-size: 22px;
+    font-style: italic;
+  }
+  .comments {
+    margin-top: 10px;
+  }
+  .read-more { // If this is for individual post pages, adjust as needed
+    text-transform: uppercase;
+    font-size: 15px;
+  }
+}
+
+
+// Footer styles (Replaces .wrapper-footer and footer)
 .site-footer {
   background-color: var(--secondary-color); // Uses dynamic secondary color
   color: var(--text-color); // Uses dynamic text color
@@ -192,10 +367,9 @@ a {
   margin-top: 50px;
   font-size: 0.9rem;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
+  border-top: 1px solid var(--border-color); // Add a subtle border
   .wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    // Uses the global .wrapper defined above
   }
 }
 
@@ -235,7 +409,7 @@ a {
 }
 
 
-// Responsive adjustments
+// Responsive adjustments (Consolidated and adjusted)
 @media (max-width: 768px) {
   .site-header {
     .wrapper {
@@ -248,7 +422,7 @@ a {
         margin-bottom: 15px; // Space below nav
       }
       .theme-toggle {
-        margin-left: 0; // Remove left margin
+        margin-left: 0; // Remove left margin on small screens
       }
     }
   }
