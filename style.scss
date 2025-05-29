@@ -1,289 +1,297 @@
 ---
 ---
 
-//
-// IMPORTS
-//
-
-@import "reset";
+// Import variables from _sass/variables.scss
 @import "variables";
-// Syntax highlighting @import is at the bottom of this file
 
-/**************/
-/* BASE RULES */
-/**************/
-
-html {
-  font-size: 100%;
-}
-
+// Base styles using CSS variables for theme switching
 body {
-	background: $white;
-  font: 18px/1.4 $helvetica;
-  color: $darkGray;
-}
-
-.container {
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 0 10px;
-  width: 100%;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: $helveticaNeue;
-  color: $darkerGray;
-  font-weight: bold;
-
-  line-height: 1.7;
-  margin: 1em 0 15px;
+  font-family: 'Inter', sans-serif; // Make sure Inter font is loaded in default.html <head>
+  line-height: 1.6;
+  margin: 0;
   padding: 0;
-
-  @include mobile {
-    line-height: 1.4;
-  }
-}
-
-h1 {
-  font-size: 30px;
-  a {
-    color: inherit;
-  }
-}
-
-h2 {
-  font-size: 24px;
-}
-
-h3 {
-  font-size: 20px;
-}
-
-h4 {
-  font-size: 18px;
-  color: $gray;
-}
-
-p {
-  margin: 15px 0;
+  background-color: var(--background-color); // Uses dynamic background color
+  color: var(--text-color); // Uses dynamic text color
+  transition: background-color 0.3s ease, color 0.3s ease; // Smooth transition for theme change
 }
 
 a {
-  color: $blue;
+  color: var(--primary-color); // Uses dynamic primary color for links
   text-decoration: none;
-	cursor: pointer;
-  &:hover, &:active {
-    color: $blue;
+  &:hover {
+    text-decoration: underline;
   }
 }
 
-ul, ol {
-  margin: 15px 0;
-  padding-left: 30px;
-}
-
-ul {
-  list-style-type: disc;
-}
-
-ol {
-  list-style-type: decimal;
-}
-
-ol ul, ul ol, ul ul, ol ol {
-  margin: 0;
-}
-
-ul ul, ol ul {
-  list-style-type: circle;
-}
-
-em, i {
-  font-style: italic;
-}
-
-strong, b {
-  font-weight: bold;
-}
-
-img {
-  max-width: 100%;
-}
-
-// Fixes images in popup boxes from Google Translate
-.gmnoprint img {
-  max-width: none;
-}
-
-.date {
-  font-style: italic;
-  color: $gray;
-}
-
-// Specify the color of the selection
-::-moz-selection {
-  color: $black;
-  background: $lightGray;
-}
-::selection {
-  color: $black;
-  background: $lightGray;
-}
-
-// Nicolas Gallagher's micro clearfix hack
-// http://nicolasgallagher.com/micro-clearfix-hack/
-.clearfix:before,
-.clearfix:after {
-    content: " ";
-    display: table;
-}
-
-.clearfix:after {
-    clear: both;
-}
-
-/*********************/
-/* LAYOUT / SECTIONS */
-/*********************/
-
-//
-// .masthead
-//
-
-.wrapper-masthead {
-  margin-bottom: 50px;
-}
-
-.masthead {
-  padding: 20px 0;
-  border-bottom: 1px solid $lightGray;
-
-  @include mobile {
-    text-align: center;
-  }
-}
-
-.site-avatar {
-  float: left;
-  width: 70px;
-  height: 70px;
-  margin-right: 15px;
-
-  @include mobile {
-    float: none;
-    display: block;
+// Header styles
+.site-header {
+  background-color: var(--secondary-color); // Uses dynamic secondary color
+  color: var(--text-color); // Uses dynamic text color
+  padding: 1.5rem 0;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap; // Allow wrapping on smaller screens
   }
-
-  img {
-    border-radius: 5px;
+  .site-title {
+    color: var(--text-color);
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 20px;
+    white-space: nowrap; // Prevent title from breaking
   }
-}
-
-.site-info {
-  float: left;
-
-  @include mobile {
-    float: none;
-    display: block;
-    margin: 0 auto;
-  }
-}
-
-.site-name {
-  margin: 0;
-  color: $darkGray;
-  cursor: pointer;
-  font-family: $helveticaNeue;
-  font-weight: 300;
-  font-size: 28px;
-  letter-spacing: 1px;
-}
-
-.site-description {
-  margin: -5px 0 0 0;
-  color: $gray;
-  font-size: 16px;
-
-  @include mobile {
-    margin: 3px 0;
-  }
-}
-
-nav {
-  float: right;
-  margin-top: 23px; // @TODO: Vertically middle align
-  font-family: $helveticaNeue;
-  font-size: 18px;
-
-  @include mobile {
-    float: none;
-    margin-top: 9px;
-    display: block;
-    font-size: 16px;
-  }
-
-  a {
-    margin-left: 20px;
-    color: $darkGray;
-    text-align: right;
-    font-weight: 300;
-    letter-spacing: 1px;
-
-    @include mobile {
-      margin: 0 10px;
-      color: $blue;
+  .site-nav {
+    flex-grow: 1; // Allow nav to take available space
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: flex-end; // Align nav items to the right
+      flex-wrap: wrap; // Allow wrapping on smaller screens
+      li {
+        margin: 0 15px;
+        a {
+          color: var(--text-color);
+          font-weight: 600; // Semi-bold
+          &:hover {
+            color: var(--primary-color);
+          }
+        }
+      }
     }
   }
 }
 
-//
-// .main
-//
-
-.posts > .post {
-  padding-bottom: 2em;
-  border-bottom: 1px solid $lightGray;
-}
-
-.posts > .post:last-child {
-  padding-bottom: 1em;
-  border-bottom: none;
-}
-
-.post {
-  blockquote {
-    margin: 1.8em .8em;
-    border-left: 2px solid $gray;
-    padding: 0.1em 1em;
-    color: $gray;
-    font-size: 22px;
-    font-style: italic;
-  }
-
-  .comments {
-    margin-top: 10px;
-  }
-
-  .read-more {
-    text-transform: uppercase;
-    font-size: 15px;
-  }
-}
-
-.wrapper-footer {
-  margin-top: 50px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: $lightGray;
-}
-
-footer {
-  padding: 20px 0;
+// Hero Section
+.hero-section {
+  background-color: var(--secondary-color); // Uses dynamic secondary color
+  color: var(--text-color); // Uses dynamic text color
+  // background-image: url('{{ site.baseurl }}/images/your-hero-image.jpg'); /* Uncomment and change this path if you want a background image */
+  background-size: cover;
+  background-position: center;
   text-align: center;
+  padding: 100px 20px;
+  min-height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .hero-content {
+    max-width: 800px;
+  }
+  .hero-title {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    font-weight: 700; // Bold
+    color: var(--primary-color); // Hero title uses primary color
+  }
+  .hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+  }
+  .hero-button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--background-color); // Button text uses background color for contrast
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-weight: 700; // Bold
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: darken(var(--primary-color), 10%);
+      text-decoration: none;
+    }
+  }
 }
 
-// Settled on moving the import of syntax highlighting to the bottom of the CSS
-// ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
-@import "highlights";
-@import "svg-icons";
+// Main content area
+.page-content {
+  padding: 40px 0;
+  .wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+}
+
+// Post Grid and Cards
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 30px 0; // Adjust padding to align with wrapper
+}
+
+.post-card {
+  background-color: var(--card-background); // Uses dynamic card background
+  border: 1px solid var(--border-color); // Uses dynamic border color
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); // Lighter shadow
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.3s ease;
+  &:hover {
+    transform: translateY(-8px); // More pronounced lift on hover
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  .post-card-content {
+    padding: 25px;
+    h2 {
+      margin-top: 0;
+      font-size: 1.8rem;
+      line-height: 1.3;
+      a {
+        color: var(--text-color); // Post title uses dynamic text color
+        text-decoration: none;
+        &:hover {
+          color: var(--primary-color);
+          text-decoration: underline;
+        }
+      }
+    }
+    .post-card-date {
+      font-size: 0.95rem;
+      color: var(--accent-color); // Date uses accent color
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    .post-card-excerpt {
+      font-size: 1.05rem;
+      margin-bottom: 25px;
+      color: var(--text-color);
+    }
+    .read-more {
+      display: inline-block;
+      color: var(--primary-color);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Footer styles
+.site-footer {
+  background-color: var(--secondary-color); // Uses dynamic secondary color
+  color: var(--text-color); // Uses dynamic text color
+  text-align: center;
+  padding: 25px 0;
+  margin-top: 50px;
+  font-size: 0.9rem;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
+  .wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+}
+
+// Dark Mode Toggle Button Styles
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem; // Adjust size of emojis/icons
+  padding: 5px;
+  margin-left: 20px; // Spacing from nav
+  color: var(--text-color); // Icon color
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--primary-color);
+  }
+  // Hide one icon based on theme
+  .light-mode-icon {
+    display: none; // Hidden by default, shown when dark
+  }
+  .dark-mode-icon {
+    display: none; // Hidden by default, shown when light
+  }
+  html.dark & .light-mode-icon {
+    display: inline;
+  }
+  html.dark & .dark-mode-icon {
+    display: none;
+  }
+  html:not(.dark) & .light-mode-icon {
+    display: none;
+  }
+  html:not(.dark) & .dark-mode-icon {
+    display: inline;
+  }
+}
+
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .site-header {
+    .wrapper {
+      flex-direction: column; // Stack items vertically
+      .site-title {
+        margin-bottom: 15px; // Space below title
+      }
+      .site-nav ul {
+        justify-content: center; // Center nav items
+        margin-bottom: 15px; // Space below nav
+      }
+      .theme-toggle {
+        margin-left: 0; // Remove left margin
+      }
+    }
+  }
+
+  .hero-section {
+    padding: 60px 15px;
+    min-height: 250px;
+    .hero-title {
+      font-size: 2.5rem;
+    }
+    .hero-subtitle {
+      font-size: 1.2rem;
+    }
+    .hero-button {
+      padding: 10px 20px;
+    }
+  }
+  .posts-grid {
+    grid-template-columns: 1fr; // Single column on small screens
+    padding: 20px;
+  }
+  .post-card-content {
+    padding: 20px;
+    h2 {
+      font-size: 1.6rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header .site-title {
+    font-size: 1.8rem;
+  }
+  .site-header .site-nav ul li {
+    margin: 0 10px;
+  }
+  .hero-section {
+    padding: 40px 10px;
+    .hero-title {
+      font-size: 2rem;
+    }
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+  }
+}
