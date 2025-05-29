@@ -74,7 +74,7 @@ a {
 .hero-section {
   background-color: var(--secondary-color); // Uses dynamic secondary color
   color: var(--text-color); // Uses dynamic text color
-  // background-image: url('{{ site.baseurl }}/images/your-hero-image.jpg'); /* Uncomment and change this path if you want a background image */
+  background-image: url('{{ site.hero_image_url }}');
   background-size: cover;
   background-position: center;
   text-align: center;
